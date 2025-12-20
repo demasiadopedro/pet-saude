@@ -79,11 +79,10 @@ const { Content } = await render(gat);
 </html>
 
 <style>
-    :root { --pet-cor-primaria: #115e59; --pet-cor-destaque: #0f766e; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
 
     .gat-hero {
-        background: var(--pet-cor-primaria);
+        background: var(--cor-azul-petroleo);
         color: white;
         padding: 3rem 0;
         border-radius: 9px;
@@ -120,7 +119,7 @@ const { Content } = await render(gat);
     
     /* Estilizando o texto que vem do Markdown */
     .texto-md { line-height: 1.8; color: #374151; }
-    .texto-md h2 { color: var(--pet-cor-primaria); margin-top: 2rem; }
+    .texto-md h2 { color: var(--cor-azul-petroleo); margin-top: 2rem; }
     .texto-md ul { margin-bottom: 1.5rem; }
     .texto-md li { margin-bottom: 0.5rem; }
 
@@ -132,9 +131,9 @@ const { Content } = await render(gat);
         margin-bottom: 1.5rem;
         border: 1px solid #e2e8f0;
     }
-    .info-box.destaque { border-color: var(--pet-cor-destaque); background: #f0fdfa; }
+    .info-box.destaque { border-color: var(--cor-laranja); background: #f0fdfa; }
 
-    .info-box h3 { margin-top: 0; color: var(--pet-cor-primaria); font-size: 1.2rem; }
+    .info-box h3 { margin-top: 0; color: var(--cor-azul-petroleo); font-size: 1.2rem; }
     .lista-membros { list-style: none; padding: 0; }
     .lista-membros li { border-bottom: 1px solid #e5e7eb; padding: 0.5rem 0; font-size: 0.95rem; }
     .lista-membros li:last-child { border-bottom: none; }
