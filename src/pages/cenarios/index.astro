@@ -1,0 +1,265 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+
+// Busca os GATs
+const gats = await getCollection('gats');
+
+// Ordena por título (GAT 1, GAT 2...)
+// Usamos localeCompare com 'numeric: true' para que GAT 10 fique depois do GAT 9, e não depois do GAT 1
+const sortedGats = gats.sort((a, b) => 
+    a.data.title.localeCompare(b.data.title, undefined, { numeric: true })
+);
+---
+
+<!doctype html>
+<html lang="pt-br">
+	<head>
+		<BaseHead title={`Cenários e GATs | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+            <section class="page-header">
+                <div class="container">
+                    <h1>Onde Atuamos?</h1>
+                    <p>Conheça a estrutura do PET Saúde Digital e nossos cenários de prática.</p>
+                </div>
+            </section>
+
+            <section class="container explanation-section">
+                <div class="explanation-card">
+                    <h2>O que são os GATs?</h2>
+                    <p>
+                        O projeto é organizado em <strong>10 Grupos de Aprendizagem Tutorial (GATs)</strong>. 
+                        Eles são "células vivas" de atuação interdisciplinar presentes em 10 unidades de Saúde em <strong>Santarém e região</strong>.
+                    </p>
+                    <div class="divisao-grid">
+                        <div class="item-divisao">
+                            <span class="icon">🎓</span>
+                            <strong>Tutoria Dupla</strong>
+                            <p>Docentes da Saúde + Tecnologia</p>
+                        </div>
+                        <div class="item-divisao">
+                            <span class="icon">🩺</span>
+                            <strong>Preceptoria</strong>
+                            <p>Profissionais do SUS local</p>
+                        </div>
+                        <div class="item-divisao">
+                            <span class="icon">👥</span>
+                            <strong>Estudantes</strong>
+                            <p>Acadêmicos da saúde e da computação</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container gats-list-section">
+                <h2 class="section-title">Nossos 10 Grupos de Trabalho</h2>
+                
+                {sortedGats.length === 0 ? (
+                    <div class="aviso-vazio">
+                        <p>⚠️ Nenhum GAT encontrado. Verifique se os arquivos .md estão na pasta <code>src/content/gats/</code>.</p>
+                    </div>
+                ) : (
+                    <div class="grid-gats">
+                        {sortedGats.map((gat) => (
+                            <a href={`/cenarios/${gat.id}/`} class="card-gat">
+                                <div class="gat-number">{gat.data.title.split('-')[0]}</div>
+                                <div class="gat-content">
+                                    <span class="badge-cenario">{gat.data.cenario}</span>
+                                    <h3>{gat.data.title}</h3>
+                                    <p>{gat.data.description}</p>
+                                    <span class="link-detalhes">Ver equipe e atividades &rarr;</span>
+                                </div>
+                            </a>
+                        ))}
+                    </div>
+                )}
+            </section>
+
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+    :root {
+        --pet-cor-primaria: #115e59;
+        --pet-cor-destaque: #0f766e;
+        --pet-cor-fundo: #f8fafc;
+        --pet-cor-texto: #4b5563;
+    }
+
+    .container { 
+        max-width: 1200px; 
+        margin: 0 auto; 
+        padding: 0 1rem; 
+    }
+
+    /* HEADER */
+    .page-header {
+        background: var(--cor-azul-escuro);
+        color: var(--cor-cinza-claro);
+        text-align: center;
+        padding: 4rem 1rem;
+        border-radius: 9px;
+    }
+    .page-header h1 { 
+        margin: 0 0 0.5rem 0;
+        font-size: 2.5rem; 
+        color: var(--pet-cor-fundo);
+    }
+
+    .page-header p { 
+        margin: 0; 
+        font-size: 1.2rem; 
+        opacity: 0.9; 
+    }
+
+    /* EXPLICAÇÃO */
+    .explanation-section { 
+        margin-top: -2rem; 
+        margin-bottom: 4rem; 
+        position: relative; 
+        z-index: 2; 
+    }
+    
+    .explanation-card {
+        background: white;
+        margin-top: 40px;
+        padding: 2.5rem;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    .explanation-card h2 { 
+        color: var(--cor-laranja); 
+        margin-top: 0; 
+    }
+    
+    .divisao-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .item-divisao {
+        background-color: #f5f5f5;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .icon {
+        display: block;
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    /* GRID GATS */
+    .section-title { 
+        text-align: center; 
+        color: var(--cor-azul-petroleo); 
+        margin-bottom: 2rem; 
+        font-size: 2rem; 
+    }
+
+    .grid-gats {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 1.5rem;
+        padding-bottom: 4rem;
+    }
+
+    .card-gat {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        overflow: hidden;
+        text-decoration: none;
+        transition: 0.3s;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    .card-gat:hover {
+        border-color: var(--cor-laranja);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .gat-number {
+        background: #f1f5f9;
+        color: #94a3b8;
+        font-size: 0.8rem;
+        font-weight: bold;
+        padding: 0.5rem 1.5rem;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .gat-content { 
+        padding: 1.5rem; 
+        flex-grow: 1; 
+        display: flex; 
+        flex-direction: column; 
+    }
+
+    .badge-cenario {
+        background: #ecfdf5;
+        color: var(--cor-azul-claro);
+        padding: 0.25rem 0.75rem;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        align-self: flex-start;
+        margin-bottom: 1rem;
+    }
+
+    .card-gat h3 { 
+        margin: 0 0 0.5rem 0; 
+        color: #1f2937; 
+        font-size: 1.25rem; 
+    }
+    .card-gat p { 
+        font-size: 0.95rem; 
+        color: #6b7280; 
+        line-height: 1.5; 
+        flex-grow: 1; 
+        margin-bottom: 1.5rem; 
+    }
+    
+    .link-detalhes { 
+        color: var(--cor-azul-claro); 
+        font-weight: bold; 
+        font-size: 0.9rem; 
+        margin-top: auto; 
+    }
+
+    .aviso-vazio { 
+        text-align: center; 
+        padding: 2rem; 
+        background: #fef2f2; 
+        color: #991b1b; 
+        border-radius: 8px; 
+    }
+
+    @media (max-width: 768px) {
+        .divisao-grid { 
+            grid-template-columns: 1fr; 
+            gap: 1rem; 
+        }
+        .grid-gats { 
+            grid-template-columns: 1fr; 
+        }
+    }
+</style>

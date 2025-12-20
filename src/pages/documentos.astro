@@ -1,0 +1,214 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+
+// --- LISTA DE DOCUMENTOS ---
+// Adicione seus links do Drive aqui.
+const documentos = [
+  {
+    nome: "Edital de Seleção de Bolsistas 2025",
+    descricao: "Regras, critérios e cronograma para seleção de novos integrantes do PET Saúde Digital.",
+    data: "10/02/2024",
+    tipo: "pdf", // Opções: 'pdf', 'doc', 'planilha', 'drive'
+    link: "https://isco.ufopa.edu.br/isco/editais-2/2025/edital-de-selecao-de-discentes-para-compor-vagas-de-bolsistas-para-atuar-no-programa-de-educacao-pelo-trabalho-para-a-saude-pet-saudeinformacao-e-s/" 
+  },
+  {
+    nome: "Modelo de Diagnostico Situacional",
+    descricao: "Template padrões para cada um dos gats.",
+    data: "15/12/2025",
+    tipo: "drive",
+    link: "https://drive.google.com/drive/folders/1QjR45Y0PkY30YLF7Xgdfy2LDi784WPop?usp=sharing"
+  }
+];
+---
+
+<!doctype html>
+<html lang="pt-br">
+	<head>
+		<BaseHead title={`Documentos | ${SITE_TITLE}`} description="Downloads e editais do PET Saúde Digital UFOPA." />
+	</head>
+	<body>
+		<Header />
+		<main>
+            <section class="doc-header">
+                <div class="container">
+                    <h1>Documentos e Materiais</h1>
+                    <p>Acesse editais, modelos oficiais e arquivos públicos do projeto.</p>
+                </div>
+            </section>
+
+            <section class="container">
+                <div class="lista-docs-wrapper">
+                    
+                    {documentos.map((doc) => (
+                        <a href={doc.link} target="_blank" class="doc-card">
+                            <div class={`icon-box ${doc.tipo}`}>
+                                {doc.tipo === 'pdf' && <span>PDF</span>}
+                                {doc.tipo === 'doc' && <span>DOC</span>}
+                                {doc.tipo === 'planilha' && <span>XLS</span>}
+                                {doc.tipo === 'drive' && <span>DIR</span>}
+                            </div>
+                            
+                            <div class="doc-content">
+                                <h3>{doc.nome}</h3>
+                                <p>{doc.descricao}</p>
+                                <div class="doc-meta">
+                                    <span class="data">📅 {doc.data}</span>
+                                    <span class="btn-fake">Baixar &darr;</span>
+                                </div>
+                            </div>
+                        </a>
+                    ))}
+
+                </div>
+            </section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+    :root {
+        --pet-cor-primaria: #115e59;
+        --pet-cor-fundo: #f8fafc;
+        --pet-cor-texto: #4b5563;
+    }
+
+    .container { 
+        max-width: 1200px;
+        margin: 0 auto; 
+        padding: 0 1rem; 
+    }
+
+    /* HEADER */
+    .doc-header {
+        background-color: var(--cor-azul-escuro);
+        color: white;
+        padding: 4rem 0 3rem 0;
+        text-align: center;
+        margin-bottom: 3rem;
+        border-radius: 9px;
+    }
+    .doc-header h1 { 
+        margin: 0; 
+        font-size: 2.5rem; 
+        color: #ffff
+    }
+    .doc-header p { 
+        opacity: 0.9; 
+        margin-top: 0.5rem; 
+        font-size: 1.2rem; 
+    }
+
+    /* LISTA WRAPPER */
+    .lista-docs-wrapper {
+        max-width: 800px; /* Limita a largura para ficar elegante */
+        margin: 0 auto 4rem auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    /* CARD DO DOCUMENTO */
+    .doc-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+        background: var( --cor-cinza-claro);
+        border: 1px solid #e2e8f0;
+        padding: 1.5rem;
+        border-radius: 12px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        position: relative;
+    }
+
+    .doc-card:hover {
+        border-color: var(--cor-laranja);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        transform: translateY(-2px);
+    }
+
+    /* ÍCONES */
+    .icon-box {
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+        letter-spacing: 1px;
+    }
+
+    /* Cores Específicas */
+    .icon-box.pdf { background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
+    .icon-box.doc { background: #dbeafe; color: #2563eb; border: 1px solid #bfdbfe; }
+    .icon-box.planilha { background: #dcfce7; color: #16a34a; border: 1px solid #bbf7d0; }
+    .icon-box.drive { background: #f3f4f6; color: #4b5563; border: 1px solid #e5e7eb; }
+
+    /* CONTEÚDO */
+    .doc-content { 
+        flex-grow: 1; 
+    }
+
+    .doc-content h3 {
+        margin: 0 0 0.5rem 0;
+        color: #1f2937;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+    
+    .doc-card:hover h3 { 
+        color: var(--cor-azul-petroleo); 
+    }
+
+    .doc-content p {
+        margin: 0 0 1rem 0;
+        color: #6b7280;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    /* META DADOS (DATA E BOTÃO) */
+    .doc-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 0.8rem;
+    }
+
+    .data { 
+        font-size: 0.85rem; 
+        color: #94a3b8;
+        font-weight: 500; 
+    }
+
+    .btn-fake {
+        color: var(--cor-laranja);
+        font-weight: bold;
+        font-size: 0.9rem;
+        background: #f0fdfa;
+        padding: 0.4rem 0.8rem;
+        border-radius: 6px;
+        transition: 0.2s;
+    }
+
+    .doc-card:hover .btn-fake {
+        background: var(--cor-azul-petroleo);
+        color: white;
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 600px) {
+        .doc-card { flex-direction: column; }
+        .icon-box { width: 50px; height: 50px; font-size: 0.8rem; }
+        .doc-meta { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+        .btn-fake { width: 100%; text-align: center; }
+    }
+</style>

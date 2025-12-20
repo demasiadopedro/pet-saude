@@ -1,0 +1,193 @@
+---
+// src/components/Sobre.astro
+
+const pilares = [
+  {
+    titulo: "Ensino",
+    subtitulo: "Formação Interdisciplinar",
+    descricao: "Unimos alunos de TI e Saúde da UFOPA. O objetivo é formar profissionais que entendam tanto de código quanto de cuidado, preparados para os desafios da Amazônia.",
+    img: "/fotos/ensino.jpg", 
+    letra: "E" 
+  },
+  {
+    titulo: "Pesquisa",
+    subtitulo: "Inovação & Diagnóstico",
+    descricao: "Investigamos a realidade local para criar soluções reais. Do diagnóstico situacional à criação de apps interoperáveis, focamos em resolver as dores do SUS.",
+    img: "/fotos/pesquisa.jpeg", 
+    letra: "P"
+  },
+  {
+    titulo: "Extensão",
+    subtitulo: "Impacto Social",
+    descricao: "A tecnologia saindo da universidade e indo para a comunidade. Promovemos letramento digital e levamos saúde digital para áreas urbanas e ribeirinhas.",
+    img: "/fotos/extensao.jpg", 
+    letra: "X" // "X" de eXtensão costuma ser usado, ou use "E" também
+  }
+];
+---
+
+<section class="sobre-container">
+    <div class="header-section">
+        <h2>Conectando Saberes, Fortalecendo o SUS</h2>
+        <p>
+            O <strong>PET Saúde Digital</strong> integra a UFOPA e a SEMSA em uma missão única: 
+            desenvolver soluções tecnológicas que respeitem a nossa cultura e melhorem a vida das pessoas no oeste do Pará.
+        </p>
+    </div>
+
+    <div class="grid-pilares">
+        {pilares.map((pilar) => (
+            <div class="card">
+                <div class="card-image">
+                    <img src={pilar.img} alt={`Foto representando ${pilar.titulo}`} />
+                    <div class="icon-badge">
+                         <span class="icon-text">{pilar.letra}</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3>{pilar.titulo} <span class="light">| {pilar.subtitulo}</span></h3>
+                    <p>{pilar.descricao}</p>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>
+
+<style>
+    /* --- VARIÁVEIS DE COR --- 
+       Altere aqui para mudar em todo o componente */
+    :root {
+        --pet-cor-primaria: var(--cor-laranja); /* Verde Escuro (Títulos) */
+        --pet-cor-destaque: var(--cor-azul-petroleo); /* Verde Médio (Botões/Ícones) */
+        --pet-cor-texto: #4b5563;    /* Cinza Escuro (Texto corrido) */
+        --pet-cor-fundo: #f8fafc;    /* Cinza Muito Claro (Fundo da seção) */
+        --pet-cor-branco: #ffffff;
+    }
+    p{
+        text-align: justify;
+    }
+
+    .sobre-container {
+        padding: 4rem 1rem;
+        background-color: var(--pet-cor-fundo);
+        text-align: center;
+    }
+
+    .header-section {
+        max-width: 900px; /* Aumentei um pouco para o texto respirar */
+        margin: 0 auto 3.5rem auto;
+    }
+
+    .header-section h2 {
+        font-size: 2.2rem;
+        color: var(--pet-cor-primaria);
+        margin-bottom: 1rem;
+    }
+
+    .header-section p {
+        font-size: 1.2rem;
+        color: var(--pet-cor-texto);
+        line-height: 1.6;
+    }
+
+    /* --- CORREÇÃO DO GRID --- */
+    .grid-pilares {
+        display: grid;
+        /* Força 3 colunas de tamanho igual */
+        grid-template-columns: 1fr 1fr 1fr; 
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* CARD DESIGN */
+    .card {
+        background: var(--pet-cor-branco);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: left;
+        display: flex;
+        flex-direction: column; /* Garante que o conteúdo flua verticalmente */
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-image {
+        position: relative;
+        height: 220px; /* Altura fixa da imagem */
+        width: 100%;
+    }
+
+    .card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+    }
+
+    .card:hover .card-image img {
+        transform: scale(1.1);
+    }
+
+    .icon-badge {
+        position: absolute;
+        bottom: -20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        background-color: var(--pet-cor-destaque);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--pet-cor-branco);
+        font-weight: bold;
+        border: 4px solid var(--pet-cor-branco);
+        font-size: 1.5rem;
+        z-index: 10;
+    }
+
+    .card-content {
+        padding: 2rem 1.5rem 1.5rem 1.5rem;
+        flex-grow: 1; /* Faz os cards terem a mesma altura se o texto for curto */
+    }
+
+    .card-content h3 {
+        color: var(--pet-cor-primaria);
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+    }
+
+    .card-content .light {
+        font-size: 0.9rem;
+        color: #888; /* Pode criar variavel se quiser */
+        font-weight: normal;
+        display: block;
+        margin-top: 5px;
+    }
+
+    .card-content p {
+        color: var(--pet-cor-texto);
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    /* --- RESPONSIVIDADE --- */
+    /* Em telas médias (tablets), mantém 3 ou muda para 1? 
+       Geralmente em tablet (768px a 1024px) 3 colunas ficam apertadas.
+       Abaixo de 900px, vamos mudar para 1 coluna empilhada para não quebrar o layout */
+    @media (max-width: 900px) {
+        .grid-pilares {
+            grid-template-columns: 1fr; /* 1 coluna no celular/tablet vertical */
+            max-width: 500px; /* Limita a largura para não ficar esticado demais */
+        }
+        
+        .header-section h2 { font-size: 2rem; }
+    }
+</style>

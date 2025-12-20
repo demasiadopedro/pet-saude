@@ -1,0 +1,177 @@
+---
+// src/components/Carousel.astro
+---
+
+<div class="carousel-container">
+  <div class="carousel-track">
+    
+    <a href="/blog" class="carousel-slide active">
+      <img src="/banner-sd.png" alt="Imagem de Saúde Digital" />
+      <div class="carousel-content">
+        <h2>Fique por dentro das novidades</h2>
+        <p>Acompanhe as últimas notícias sobre saúde digital no oeste do Pará.</p>
+      </div>
+    </a>
+
+    <a href="/cenarios" class="carousel-slide">
+      <img src="/banner-padrao.png" alt="Equipe em campo" />
+      <div class="carousel-content">
+        <h2>Venha nos conhecer</h2>
+        <p>Descubra onde atuamos e como impactamos a comunidade.</p>
+      </div>
+    </a>
+
+  </div>
+
+  <button class="carousel-btn prev" aria-label="Slide Anterior">&#10094;</button>
+  <button class="carousel-btn next" aria-label="Próximo Slide">&#10095;</button>
+</div>
+
+<style>
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  /* O slide agora é um link <a>, precisamos resetar o estilo de link padrão */
+  .carousel-slide {
+    display: none;
+    position: relative;
+    width: 100%;
+    text-decoration: none; /* Remove sublinhado */
+    color: inherit; /* Mantém cores originais */
+    cursor: pointer; /* Garante que mostre a mãozinha */
+    animation: fadeEffect 1s;
+  }
+
+  .carousel-slide.active {
+    display: block;
+  }
+
+  .carousel-slide img {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.7);
+    transition: filter 0.3s, transform 0.3s; /* Efeito suave ao passar o mouse */
+  }
+
+  /* Efeito visual ao passar o mouse em qualquer parte do slide */
+  .carousel-slide:hover img {
+    filter: brightness(0.5); /* Escurece um pouco mais */
+    transform: scale(1.02); /* Leve zoom */
+  }
+
+  .carousel-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    width: 80%;
+    pointer-events: none; /* Deixa o clique "atravessar" o texto e ir pro link pai */
+  }
+
+  .carousel-content h2 {
+    color: floralwhite;
+    font-size: 2.3rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+  }
+
+  .carousel-content p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+  }
+
+  /* Botões de Navegação (Setas) */
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.3);
+    color: white;
+    border: none;
+    padding: 16px;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 10; /* Garante que fique acima da imagem */
+    border-radius: 50%; /* Bolinha fica mais moderno */
+    margin: 0 10px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+  }
+
+  .carousel-btn:hover {
+    background-color: rgba(0,0,0,0.8);
+  }
+
+  .prev { left: 0; }
+  .next { right: 0; }
+
+  @keyframes fadeEffect {
+    from {opacity: 0.4}
+    to {opacity: 1}
+  }
+
+  @media (max-width: 768px) {
+    .carousel-slide img { height: 250px; }
+    .carousel-content h2 { font-size: 1.5rem; }
+    .carousel-content p { font-size: 0.9rem; }
+  }
+</style>
+
+<script>
+  // Script corrigido com verificação de nulos
+  let slideIndex = 0;
+  
+  // Seleciona os elementos e diz pro TypeScript que eles são Elementos HTML
+  const slides = document.querySelectorAll('.carousel-slide');
+  const prevBtn = document.querySelector('.prev');
+  const nextBtn = document.querySelector('.next');
+
+  function showSlide(n: number) {
+    // Remove a classe active de todos
+    slides.forEach(slide => slide.classList.remove('active'));
+    
+    slideIndex = n;
+    if (slideIndex >= slides.length) slideIndex = 0;
+    if (slideIndex < 0) slideIndex = slides.length - 1;
+
+    // Adiciona a classe active no atual
+    if (slides[slideIndex]) {
+        slides[slideIndex].classList.add('active');
+    }
+  }
+
+  if (prevBtn && nextBtn) {
+      prevBtn.addEventListener('click', (e) => {
+          e.preventDefault(); // Impede que o clique no botão ative o link da imagem sem querer
+          e.stopPropagation(); // Impede propagaçãos
+          showSlide(slideIndex - 1);
+      });
+
+      nextBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          showSlide(slideIndex + 1);
+      });
+  }
+
+  // Timer automático
+  setInterval(() => {
+    showSlide(slideIndex + 1);
+  }, 5000);
+</script>

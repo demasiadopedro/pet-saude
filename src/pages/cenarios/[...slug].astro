@@ -1,0 +1,165 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+// 1. Gera as rotas para todos os arquivos da coleção 'gats'
+export async function getStaticPaths() {
+    const gats = await getCollection('gats');
+    return gats.map((gat) => ({
+        params: { slug: gat.id }, 
+        props: gat,
+    }));
+}
+type Props = CollectionEntry<'gats'>;
+
+const gat = Astro.props;
+
+// 2. Renderiza o conteúdo Markdown
+const { Content } = await render(gat);
+---
+
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <BaseHead title={gat.data.title} description={gat.data.description} />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <div class="gat-hero">
+                <div class="container">
+                    <a href="/cenarios" class="voltar-link">&larr; Voltar para cenários</a>
+                    <span class="badge-hero">{gat.data.cenario}</span>
+                    <h1>{gat.data.title}</h1>
+                </div>
+            </div>
+
+            <div class="container layout-gat">
+                <article class="conteudo-gat">
+                    {gat.data.heroImage && <img src={gat.data.heroImage} alt="" class="capa-gat" />}
+                    <div class="texto-md">
+                        <Content />
+                    </div>
+                </article>
+
+                <aside class="sidebar-gat">
+                    {/* --- NOVO: BLOCO DE LOCALIZAÇÃO --- */}
+                    {gat.data.google_maps && (
+                        <div class="info-box">
+                            <h3>📍 Localização</h3>
+                            <p>Confira onde fica esta unidade de saúde.</p>
+                            <a href={gat.data.google_maps} target="_blank" rel="noopener noreferrer" class="botao-mapa">
+                                Ver no Google Maps
+                            </a>
+                        </div>
+                    )}
+
+                    <div class="info-box">
+                        <h3>Composição do Grupo</h3>
+                        <p>Estrutura padrão do PET-Saúde:</p>
+                        <ul class="lista-membros">
+                            <li><strong>2 Tutores:</strong> 1 Saúde + 1 Tecnologia</li>
+                            <li><strong>3 Preceptores:</strong> Profissionais do SUS</li>
+                            <li><strong>1 Orientador:</strong> Serviço/Comunidade</li>
+                            <li><strong>10 Estudantes:</strong> Interdisciplinar</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box destaque">
+                        <h3>Objetivo</h3>
+                        <p>{gat.data.description}</p>
+                    </div>
+                </aside>
+            </div>
+        </main>
+        <Footer />
+    </body>
+</html>
+
+<style>
+    :root { --pet-cor-primaria: #115e59; --pet-cor-destaque: #0f766e; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+
+    .gat-hero {
+        background: var(--pet-cor-primaria);
+        color: white;
+        padding: 3rem 0;
+        border-radius: 9px;
+        align-items: center;
+    }
+    .voltar-link { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; }
+    .voltar-link:hover { text-decoration: underline; color: white; }
+    
+    .badge-hero {
+        display: inline-block;
+        background: rgba(255,255,255,0.2);
+        padding: 0.3rem 0.8rem;
+        border-radius: 50px;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+    }
+    h1 { 
+        margin: 0.5rem 0 0 0; 
+        font-size: 2.5rem; 
+        color:white;
+    }
+
+    /* LAYOUT DUAS COLUNAS */
+    .layout-gat {
+        display: grid;
+        grid-template-columns: 2fr 1fr; /* Conteúdo 2x maior que lateral */
+        gap: 3rem;
+        margin-top: 3rem;
+        margin-bottom: 4rem;
+    }
+
+    /* Conteúdo Markdown */
+    .capa-gat { width: 100%; border-radius: 12px; margin-bottom: 2rem; max-height: 400px; object-fit: cover; }
+    
+    /* Estilizando o texto que vem do Markdown */
+    .texto-md { line-height: 1.8; color: #374151; }
+    .texto-md h2 { color: var(--pet-cor-primaria); margin-top: 2rem; }
+    .texto-md ul { margin-bottom: 1.5rem; }
+    .texto-md li { margin-bottom: 0.5rem; }
+
+    /* Sidebar */
+    .info-box {
+        background: #f8fafc;
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+        border: 1px solid #e2e8f0;
+    }
+    .info-box.destaque { border-color: var(--pet-cor-destaque); background: #f0fdfa; }
+
+    .info-box h3 { margin-top: 0; color: var(--pet-cor-primaria); font-size: 1.2rem; }
+    .lista-membros { list-style: none; padding: 0; }
+    .lista-membros li { border-bottom: 1px solid #e5e7eb; padding: 0.5rem 0; font-size: 0.95rem; }
+    .lista-membros li:last-child { border-bottom: none; }
+
+    /* --- NOVO CSS: BOTÃO MAPA --- */
+    .botao-mapa {
+        display: block;
+        background-color: #ef4444; /* Vermelho padrão para destaque de mapa */
+        color: white;
+        text-align: center;
+        padding: 0.75rem;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+        margin-top: 1rem;
+        transition: transform 0.2s, background-color 0.2s;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .botao-mapa:hover {
+        background-color: #dc2626;
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+        .layout-gat { grid-template-columns: 1fr; }
+    }
+</style>
