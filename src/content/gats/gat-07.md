@@ -3,6 +3,7 @@ title: "GAT 7 - Mararu"
 cenario: "Unidade Saúde da Família de Mararu"
 google_maps: "https://www.google.com/maps/search/?api=1&query=USF+Mararu+Santarém+PA"
 description: "Experiência prática na comunidade de Mararu, aplicando conhecimentos de tecnologia e saúde em área periurbana."
+heroImage: "../../assets/gatFotos/gat7.png"
 ---
 
 ## Equipe

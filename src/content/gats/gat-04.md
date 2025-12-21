@@ -3,6 +3,7 @@ title: "GAT 4 - Salvação"
 cenario: "Unidade Saúde da Família do Salvação"
 google_maps: "https://www.google.com/maps/search/?api=1&query=USF+Salvação+Santarém+PA"
 description: "Ações voltadas para a saúde da família na região do Salvação, com suporte tecnológico e farmacêutico."
+heroImage: "../../assets/gatFotos/gat4.png"
 ---
 
 ## Equipe

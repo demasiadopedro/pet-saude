@@ -3,6 +3,7 @@ import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { Image } from 'astro:assets';
 
 // 1. Gera as rotas para todos os arquivos da coleção 'gats'
 export async function getStaticPaths() {
@@ -38,7 +39,13 @@ const { Content } = await render(gat);
 
             <div class="container layout-gat">
                 <article class="conteudo-gat">
-                    {gat.data.heroImage && <img src={gat.data.heroImage} alt="" class="capa-gat" />}
+                    {gat.data.heroImage && (
+                        <Image 
+                            src={gat.data.heroImage} 
+                            alt={gat.data.title} 
+                            class="capa-gat" 
+                        />
+                    )}
                     <div class="texto-md">
                         <Content />
                     </div>
@@ -100,7 +107,7 @@ const { Content } = await render(gat);
     }
     h1 { 
         margin: 0.5rem 0 0 0; 
-        font-size: 2.5rem; 
+        font-size: 2rem; 
         color:white;
     }
 

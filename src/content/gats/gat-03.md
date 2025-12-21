@@ -3,6 +3,8 @@ title: "GAT 3 - Conquista"
 cenario: "Unidade Básica de Saúde da Conquista"
 google_maps: "https://www.google.com/maps/search/?api=1&query=UBS+Conquista+Santarém+PA"
 description: "Vivência prática na UBS do bairro Conquista, desenvolvendo soluções interdisciplinares em saúde."
+heroImage: "../../assets/gatFotos/gat3.png"
+
 ---
 
 ## Equipe

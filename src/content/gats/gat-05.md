@@ -3,6 +3,7 @@ title: "GAT 5 - Interventoria"
 cenario: "Unidade Saúde da Família Interventoria"
 google_maps: "https://www.google.com/maps/search/?api=1&query=USF+Interventoria+Santarém+PA"
 description: "Desenvolvimento de competências na USF Interventoria, integrando dados de saúde e atendimento à comunidade."
+heroImage: "../../assets/gatFotos/gat5.png"
 ---
 
 ## Equipe

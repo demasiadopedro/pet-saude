@@ -3,6 +3,7 @@ title: "GAT 10 - Gestão e Saúde Ribeirinha"
 cenario: "SEMSA (Núcleo de Informática), USF Abaré I e USF Arapixuna"
 google_maps: "https://www.google.com/maps/search/?api=1&query=SEMSA+Santarém+PA"
 description: "Cenário complexo envolvendo a gestão de dados na Secretaria, saúde fluvial (Abaré I) e ribeirinha (Arapixuna)."
+heroImage: "../../assets/gatFotos/gat10.png"
 ---
 
 ## Equipe
