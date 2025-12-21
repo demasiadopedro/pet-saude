@@ -1,0 +1,188 @@
+---
+// src/components/Intro.astro
+---
+
+<section class="contexto-section">
+    <div class="container">
+
+        <div class="intro-box">
+            <span class="tag-duvida">Entenda na prática</span>
+            <h2>O que é Saúde Digital?</h2>
+            <p class="texto-destaque">
+                É usar a tecnologia para <strong>melhorar o atendimento no SUS</strong>: agilizar filas, conectar comunidades distantes via telessaúde, e garantir que a informação certa chegue na hora do cuidado – especialmente nas áreas mais vulneráveis da Amazônia.
+            </p>
+        </div>
+
+        <div class="grid-explainer">
+
+            <div class="card-explainer">
+                <div class="icon-big">🌐</div>
+                <h3>Para o Cidadão</h3>
+                <p>
+                    Significa um atendimento mais <strong>rápido e próximo</strong>. Menos papelada, menos deslocamento para consultas simples e mais informação de saúde na palma da mão.
+                </p>
+            </div>
+
+            <div class="card-explainer">
+                <div class="icon-big">🏥</div>
+                <h3>Para o Profissional</h3>
+                <p>
+                    Oferece <strong>ferramentas para um cuidado mais eficiente</strong>: 
+                    prontuários eletrônicos integrados, apoio à decisão clínica e teleconsultoria 
+                    com especialistas.
+                </p>
+            </div>
+
+            <div class="card-explainer">
+                <div class="icon-big">📈</div>
+                <h3>Para a Gestão</h3>
+                <p>
+                    Permite <strong>monitorar a saúde da população em tempo real</strong>, 
+                    planejar ações com base em dados e distribuir recursos de forma mais inteligente.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="cta-box">
+            <h3>E o PET Saúde Digital faz isso como?</h3>
+            <p>Nós atuamos na ponta, unindo universidade e serviço de saúde para 
+                <strong>criar, testar e implementar</strong> 
+                essas soluções tecnológicas dentro do SUS de Santarém e região.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    :root {
+        --pet-cor-texto: #4b5563;
+    }
+
+    .contexto-section {
+        padding: 0.1rem 0;
+        background-color: white;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    .intro-box {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 4rem auto;
+    }
+
+    .tag-duvida {
+        background-color: #fef3c7;
+        color: #d97706;
+        font-weight: bold;
+        padding: 0.4rem 1rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .intro-box h2 {
+        font-size: 2.5rem;
+        color: var(--cor-laranja);
+        margin: 1rem 0;
+    }
+
+    .texto-destaque {
+        font-size: 1.3rem;
+        color: #555;
+        line-height: 1.6;
+    }
+
+    .grid-explainer {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    .card-explainer {
+        background: var(--cor-cinza-claro);
+        padding: 2rem;
+        border-radius: 16px;
+        text-align: center;
+        border: 1px solid transparent;
+        transition: 0.3s;
+    }
+
+    .card-explainer:hover {
+        border-color: var(--cor-laranja);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(17, 94, 89, 0.1);
+    }
+
+    .icon-big {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        display: block;
+    }
+
+    .card-explainer h3 {
+        color: var(--cor-laranja);
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+
+    .card-explainer p {
+        color: var(--pet-cor-texto);
+        line-height: 1.6;
+        font-size: 1rem;
+    }
+
+    .cta-box {
+        text-align: center;
+        padding: 2.5rem;
+        background-color: #f0f9ff;
+        border-radius: 16px;
+        border-left: 5px solid var(--cor-laranja);
+    }
+
+    .cta-box h3 {
+        color: var(--cor-laranja);
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .cta-box p {
+        color: var(--pet-cor-texto);
+        font-size: 1.1rem;
+        max-width: 700px;
+        margin: 0 auto 1.5rem auto;
+        line-height: 1.6;
+    }
+
+    .btn-saiba-mais {
+        display: inline-block;
+        background-color: var(--cor-laranja);
+        color: white;
+        padding: 0.8rem 2rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+    .btn-saiba-mais:hover {
+        background-color: #d97706;
+    }
+
+    @media (max-width: 850px) {
+        .grid-explainer {
+            grid-template-columns: 1fr;
+        }
+        .intro-box h2 { font-size: 2rem; }
+        .texto-destaque { font-size: 1.1rem; }
+        .cta-box { padding: 1.5rem; }
+    }
+</style>

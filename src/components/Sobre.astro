@@ -4,36 +4,40 @@
 const pilares = [
   {
     titulo: "Ensino",
-    subtitulo: "Formação Interdisciplinar",
-    descricao: "Unimos alunos de TI e Saúde da UFOPA. O objetivo é formar profissionais que entendam tanto de código quanto de cuidado, preparados para os desafios da Amazônia.",
-    img: "/fotos/ensino.jpg", 
-    letra: "E" 
+    subtitulo: "Formação na Prática",
+    descricao: "No PET, alunos de TI e Saúde aprendem juntos, resolvendo problemas reais do SUS. É uma formação que une teoria da sala de aula com a realidade dos postos de saúde.",
+    img: "/fotos/ensino.jpg",
+    letra: "E"
   },
   {
     titulo: "Pesquisa",
-    subtitulo: "Inovação & Diagnóstico",
-    descricao: "Investigamos a realidade local para criar soluções reais. Do diagnóstico situacional à criação de apps interoperáveis, focamos em resolver as dores do SUS.",
-    img: "/fotos/pesquisa.jpeg", 
+    subtitulo: "Soluções para a Realidade Local",
+    descricao: "Investigamos as necessidades do território para criar ferramentas digitais úteis. Nosso laboratório é a Amazônia, e nosso objetivo é gerar inovações que funcionem aqui.",
+    img: "/fotos/pesquisa.jpeg",
     letra: "P"
   },
   {
     titulo: "Extensão",
-    subtitulo: "Impacto Social",
-    descricao: "A tecnologia saindo da universidade e indo para a comunidade. Promovemos letramento digital e levamos saúde digital para áreas urbanas e ribeirinhas.",
-    img: "/fotos/extensao.jpg", 
-    letra: "X" // "X" de eXtensão costuma ser usado, ou use "E" também
+    subtitulo: "Tecnologia a Serviço da Comunidade",
+    descricao: "Não ficamos na universidade. Levamos capacitação, oficinas de letramento digital e projetos-piloto diretamente para as unidades de saúde e a população.",
+    img: "/fotos/extensao.jpg",
+    letra: "X"
   }
 ];
 ---
 
 <section class="sobre-container">
     <div class="header-section">
-        <h2>Conectando Saberes, Fortalecendo o SUS</h2>
+        <h2>O Programa PET Saúde</h2>
         <p>
-            O <strong>PET Saúde Digital</strong> integra a UFOPA e a SEMSA em uma missão única: 
-            desenvolver soluções tecnológicas que respeitem a nossa cultura e melhorem a vida das pessoas no oeste do Pará.
+            O <strong>Programa de Educação pelo Trabalho para a Saúde (PET Saúde)</strong> é uma iniciativa nacional que forma profissionais de saúde e tecnologia <strong>diretamente dentro do SUS</strong>, unindo universidade, serviço e comunidade.
+        </p>
+        <p>
+            Em Santarém, somos o <strong>PET Saúde Digital (I&SD) da UFOPA</strong>. Nosso diferencial é usar essa metodologia para <strong>criar e aplicar tecnologia</strong> que resolva os desafios únicos da saúde na Amazônia.
         </p>
     </div>
+
+    <h3 style="text-align: center; color: var(--cor-laranja); margin: 3rem 0 2rem 0;">Nosso trabalho se baseia em três pilares:</h3>
 
     <div class="grid-pilares">
         {pilares.map((pilar) => (
@@ -54,17 +58,12 @@ const pilares = [
 </section>
 
 <style>
-    /* --- VARIÁVEIS DE COR --- 
-       Altere aqui para mudar em todo o componente */
     :root {
-        --pet-cor-primaria: var(--cor-laranja); /* Verde Escuro (Títulos) */
-        --pet-cor-destaque: var(--cor-azul-petroleo); /* Verde Médio (Botões/Ícones) */
-        --pet-cor-texto: #4b5563;    /* Cinza Escuro (Texto corrido) */
-        --pet-cor-fundo: #f8fafc;    /* Cinza Muito Claro (Fundo da seção) */
+        --pet-cor-primaria: var(--cor-laranja);
+        --pet-cor-destaque: var(--cor-azul-petroleo);
+        --pet-cor-texto: #4b5563;
+        --pet-cor-fundo: #f8fafc;
         --pet-cor-branco: #ffffff;
-    }
-    p{
-        text-align: justify;
     }
 
     .sobre-container {
@@ -74,33 +73,33 @@ const pilares = [
     }
 
     .header-section {
-        max-width: 900px; /* Aumentei um pouco para o texto respirar */
-        margin: 0 auto 3.5rem auto;
+        max-width: 900px;
+        margin: 0 auto 2.5rem auto;
     }
 
     .header-section h2 {
         font-size: 2.2rem;
         color: var(--pet-cor-primaria);
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
     }
 
     .header-section p {
         font-size: 1.2rem;
         color: var(--pet-cor-texto);
         line-height: 1.6;
+        margin-bottom: 1.2rem;
+        text-align: justify;
     }
 
-    /* --- CORREÇÃO DO GRID --- */
+
     .grid-pilares {
         display: grid;
-        /* Força 3 colunas de tamanho igual */
-        grid-template-columns: 1fr 1fr 1fr; 
+        grid-template-columns: 1fr 1fr 1fr;
         gap: 2rem;
         max-width: 1200px;
         margin: 0 auto;
     }
 
-    /* CARD DESIGN */
     .card {
         background: var(--pet-cor-branco);
         border-radius: 12px;
@@ -109,7 +108,7 @@ const pilares = [
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         text-align: left;
         display: flex;
-        flex-direction: column; /* Garante que o conteúdo flua verticalmente */
+        flex-direction: column;
     }
 
     .card:hover {
@@ -119,7 +118,7 @@ const pilares = [
 
     .card-image {
         position: relative;
-        height: 220px; /* Altura fixa da imagem */
+        height: 220px;
         width: 100%;
     }
 
@@ -154,7 +153,7 @@ const pilares = [
 
     .card-content {
         padding: 2rem 1.5rem 1.5rem 1.5rem;
-        flex-grow: 1; /* Faz os cards terem a mesma altura se o texto for curto */
+        flex-grow: 1;
     }
 
     .card-content h3 {
@@ -166,7 +165,7 @@ const pilares = [
 
     .card-content .light {
         font-size: 0.9rem;
-        color: #888; /* Pode criar variavel se quiser */
+        color: #888;
         font-weight: normal;
         display: block;
         margin-top: 5px;
@@ -178,16 +177,12 @@ const pilares = [
         line-height: 1.5;
     }
 
-    /* --- RESPONSIVIDADE --- */
-    /* Em telas médias (tablets), mantém 3 ou muda para 1? 
-       Geralmente em tablet (768px a 1024px) 3 colunas ficam apertadas.
-       Abaixo de 900px, vamos mudar para 1 coluna empilhada para não quebrar o layout */
     @media (max-width: 900px) {
         .grid-pilares {
-            grid-template-columns: 1fr; /* 1 coluna no celular/tablet vertical */
-            max-width: 500px; /* Limita a largura para não ficar esticado demais */
+            grid-template-columns: 1fr;
+            max-width: 500px;
         }
-        
         .header-section h2 { font-size: 2rem; }
+        .header-section p { font-size: 1.1rem; }
     }
 </style>
