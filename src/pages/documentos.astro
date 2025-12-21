@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import { SITE_TITLE } from '../consts';
 
 // --- LISTA DE DOCUMENTOS ---
-// Adicione seus links do Drive aqui.
+// Adicione links do Drive aqui.
 const documentos = [
   {
     nome: "Edital de Seleção de Bolsistas 2025",
@@ -104,6 +104,7 @@ const documentos = [
 
     /* LISTA WRAPPER */
     .lista-docs-wrapper {
+        
         max-width: 800px; /* Limita a largura para ficar elegante */
         margin: 0 auto 4rem auto;
         display: flex;
@@ -123,6 +124,8 @@ const documentos = [
         text-decoration: none;
         transition: all 0.2s ease;
         position: relative;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .doc-card:hover {
@@ -188,17 +191,20 @@ const documentos = [
         color: #94a3b8;
         font-weight: 500; 
     }
-
     .btn-fake {
         color: var(--cor-laranja);
         font-weight: bold;
         font-size: 0.9rem;
         background: #f0fdfa;
-        padding: 0.4rem 0.8rem;
+        width: 110px; 
+        box-sizing: border-box; 
+        display: inline-flex; 
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem 0; 
         border-radius: 6px;
         transition: 0.2s;
-        text-align: center;
-        width: 55px;
+        white-space: nowrap; 
     }
 
     .doc-card:hover .btn-fake {
@@ -208,9 +214,48 @@ const documentos = [
 
     /* RESPONSIVO */
     @media (max-width: 600px) {
-        .doc-card { flex-direction: column; }
-        .icon-box { width: 50px; height: 50px; font-size: 0.8rem; }
-        .doc-meta { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-        .btn-fake { width: 100%; text-align: center; }
+        .doc-card { 
+            flex-direction: column; 
+            align-items: stretch; 
+            padding: 1.25rem; 
+        }
+        
+        .icon-box { 
+            height: 30px; 
+            font-size: 0.8rem; 
+            margin-bottom: 1rem; 
+        }
+        
+        .doc-meta { 
+            flex-direction: column; 
+            align-items: stretch; 
+            gap: 1rem; 
+            width: 100%; 
+        }
+        
+        .btn-fake { 
+            width: 100%; 
+            display: flex;
+            justify-content: center; 
+            margin-top: 0.5rem;
+        }
+
+        .doc-content {
+            width: 100%;
+        }
     }
+    
+    @media (max-width: 400px) {
+        .doc-card {
+            padding: 1rem;
+        }
+        
+        .doc-content h3 {
+            font-size: 1.1rem;
+        }
+        
+        .doc-content p {
+            font-size: 0.9rem;
+        }
+    }       
 </style>
