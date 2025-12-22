@@ -5,7 +5,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { Image } from 'astro:assets';
 
-// 1. Gera as rotas para todos os arquivos da coleção 'gats'
+// Gera as rotas para todos os arquivos da coleção 'gats'
 export async function getStaticPaths() {
     const gats = await getCollection('gats');
     return gats.map((gat) => ({
@@ -17,7 +17,7 @@ type Props = CollectionEntry<'gats'>;
 
 const gat = Astro.props;
 
-// 2. Renderiza o conteúdo Markdown
+// Renderiza o conteúdo Markdown
 const { Content } = await render(gat);
 ---
 
