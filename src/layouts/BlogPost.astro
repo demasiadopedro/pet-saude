@@ -23,6 +23,31 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			.hero-image {
 				width: 100%;
 			}
+			.blog-hero {
+                padding: 1rem 0;
+                margin-bottom: 2rem;
+            }
+
+            .voltar-link {
+                display: inline-flex;
+                align-items: center;
+                text-decoration: none;
+                color: rgb(var(--gray)); /* Usa a cor cinza definida no seu tema */
+                font-weight: 500;
+                margin-bottom: 1rem;
+                transition: color 0.2s ease;
+            }
+
+            .voltar-link:hover {
+                color: rgb(var(--accent)); /* Usa a cor de destaque do seu tema */
+            }
+
+            /* Garante que o container alinhe o conteúdo */
+            .blog-hero .container {
+                max-width: 960px; /* Mesma largura do seu main */
+                margin: 0 auto;
+                padding: 0 1rem; /* Pequeno padding lateral para mobile */
+            }
 			.hero-image img {
 				display: block;
 				margin: 0 auto;
@@ -68,6 +93,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<Header />
 		<main>
 			<article>
+				<a href="/blog" class="voltar-link">&larr; Voltar</a>
 				<div class="hero-image">
 					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
 				</div>
