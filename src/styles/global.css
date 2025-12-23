@@ -1,23 +1,19 @@
 /*
   The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
 
+/* 1. IMPORTANDO A FONTE UBUNTU (Pesos 300, 400, 500, 700 + Itálicos) */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
 :root {
-
 	--cor-azul-escuro:   #022D77;
-  	--cor-azul-petroleo: #1D81BD;
-  	--cor-azul-claro:    #4DBFFF;
-  	--cor-laranja:       #FC380F;
-  	--cor-cinza-claro:   #DBE3E3;
+	--cor-azul-petroleo: #1D81BD;
+	--cor-azul-claro:    #4DBFFF;
+	--cor-laranja:       #FC380F;
+	--cor-cinza-claro:   #DBE3E3;
 	
-	/*
-	conforme o decorrer do projeto quero utilizar 
-	cada vez menos as variaveis a baixo
-	elas sao herança do template do framework
-	*/
-
+	/* Variáveis do template original */
 	--accent: #2337ff;
 	--accent-dark: #000d8a;
 	--black: 15, 18, 25;
@@ -29,22 +25,12 @@
 		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px
 		rgba(var(--gray), 33%);
 }
-@font-face {
-	font-family: "Atkinson";
-	src: url("/fonts/atkinson-regular.woff") format("woff");
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "Atkinson";
-	src: url("/fonts/atkinson-bold.woff") format("woff");
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-}
+
+/* 2. REMOVIDOS OS @FONT-FACE DA ATKINSON */
+
 body {
-	font-family: "Atkinson", sans-serif;
+    /* 3. APLICANDO UBUNTU GLOBALMENTE AQUI */
+	font-family: "Ubuntu", sans-serif; 
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -55,42 +41,34 @@ body {
 	color: rgb(var(--gray-dark));
 	font-size: 20px;
 	line-height: 1.7;
+    font-weight: 400; /* Define o peso padrão como Regular */
 }
+
 main {
 	width: 960px;
 	max-width: calc(100% - 2em);
 	margin: auto;
 	padding: 3em 1em;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+
+h1, h2, h3, h4, h5, h6 {
 	margin: 0 0 0.5rem 0;
 	color: rgb(var(--black));
 	line-height: 1.2;
+    font-family: "Ubuntu", sans-serif; /* Reforço para títulos */
+    font-weight: 700; /* Títulos em Bold por padrão */
 }
-h1 {
-	font-size: 3.052em;
-}
-h2 {
-	font-size: 2.441em;
-}
-h3 {
-	font-size: 1.953em;
-}
-h4 {
-	font-size: 1.563em;
-}
-h5 {
-	font-size: 1.25em;
-}
-strong,
-b {
+
+h1 { font-size: 3.052em; }
+h2 { font-size: 2.441em; }
+h3 { font-size: 1.953em; }
+h4 { font-size: 1.563em; }
+h5 { font-size: 1.25em; }
+
+strong, b {
 	font-weight: 700;
 }
+
 a {
 	color: var(--accent);
 }
@@ -106,9 +84,11 @@ p {
 textarea {
 	width: 100%;
 	font-size: 16px;
+    font-family: "Ubuntu", sans-serif; /* Garante fonte em inputs */
 }
 input {
 	font-size: 16px;
+    font-family: "Ubuntu", sans-serif; /* Garante fonte em inputs */
 }
 table {
 	width: 100%;
@@ -148,7 +128,6 @@ hr {
 		padding: 1em;
 	}
 }
-
 .sr-only {
 	border: 0;
 	padding: 0;
@@ -157,12 +136,44 @@ hr {
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
 	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
 	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
 	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
+}
+
+/* 4. CLASSES UTILITÁRIAS (Que você pediu) */
+/* Agora você pode usar class="ubuntu-bold" em qualquer tag */
+
+.ubuntu-light {
+  font-weight: 300;
+  font-style: normal;
+}
+.ubuntu-regular {
+  font-weight: 400;
+  font-style: normal;
+}
+.ubuntu-medium {
+  font-weight: 500;
+  font-style: normal;
+}
+.ubuntu-bold {
+  font-weight: 700;
+  font-style: normal;
+}
+.ubuntu-light-italic {
+  font-weight: 300;
+  font-style: italic;
+}
+.ubuntu-regular-italic {
+  font-weight: 400;
+  font-style: italic;
+}
+.ubuntu-medium-italic {
+  font-weight: 500;
+  font-style: italic;
+}
+.ubuntu-bold-italic {
+  font-weight: 700;
+  font-style: italic;
 }
