@@ -12,110 +12,122 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.blog-hero {
-                padding: 1rem 0;
-                margin-bottom: 2rem;
+    <head>
+        <BaseHead title={title} description={description} />
+        <style>
+            main {
+                width: calc(100% - 2em);
+                max-width: 100%;
+                margin: 0;
+            }
+            
+            /* --- NOVO ESTILO DO BOTÃO VOLTAR --- */
+            .nav-container {
+                width: 720px;
+                max-width: calc(100% - 2em);
+                margin: 0 auto 1.5rem auto; /* Centraliza igual ao texto .prose */
+                padding: 0 1em;
             }
 
             .voltar-link {
                 display: inline-flex;
                 align-items: center;
+                gap: 0.5rem; /* Espaço entre seta e texto */
                 text-decoration: none;
-                color: rgb(var(--gray)); /* Usa a cor cinza definida no seu tema */
+                color: rgb(var(--gray-dark));
+                background-color: #f3f4f6; /* Fundo cinza clarinho */
                 font-weight: 500;
-                margin-bottom: 1rem;
-                transition: color 0.2s ease;
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
+                border-radius: 99px; /* Formato Pílula */
+                transition: all 0.2s ease;
+                border: 1px solid transparent;
             }
 
             .voltar-link:hover {
-                color: rgb(var(--accent)); /* Usa a cor de destaque do seu tema */
+                background-color: white;
+                color: rgb(var(--accent));
+                border-color: rgb(var(--accent));
+                transform: translateX(-3px); /* Leve movimento para esquerda */
+                box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             }
 
-            /* Garante que o container alinhe o conteúdo */
-            .blog-hero .container {
-                max-width: 960px; /* Mesma largura do seu main */
+            /* --- FIM DO NOVO ESTILO --- */
+
+            .hero-image {
+                width: 100%;
+            }
+            
+            .hero-image img {
+                display: block;
                 margin: 0 auto;
-                padding: 0 1rem; /* Pequeno padding lateral para mobile */
+                border-radius: 12px;
+                box-shadow: var(--box-shadow);
+                width: 60%; /* Mantive seus 60% */
+                object-fit: cover;
             }
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-				width: 60%;
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-				font-size: 14px;
-			}
-			.title h1 {
-				margin: 0 0 0.4em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-			@media (max-width: 768px) {
-   				.title{
-					font-size: 10px;
-				}
-				
 
-			}
-		</style>
-	</head>
+            .prose {
+                width: 720px;
+                max-width: calc(100% - 2em);
+                margin: auto;
+                padding: 1em;
+                color: rgb(var(--gray-dark));
+            }
+            .title {
+                margin-bottom: 1em;
+                padding: 1em 0;
+                text-align: center;
+                line-height: 1;
+            }
+            .title h1 {
+                margin: 0 0 0.4em 0;
+            }
+            .date {
+                margin-bottom: 0.5em;
+                color: rgb(var(--gray));
+            }
+            .last-updated-on {
+                font-style: italic;
+            }
+        </style>
+    </head>
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				<a href="/blog" class="voltar-link">&larr; Voltar</a>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
+    <body>
+        <Header />
+        <main>
+            <article>
+                
+                <div class="nav-container">
+                    <a href="/blog" class="voltar-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        Voltar para notícias
+                    </a>
+                </div>
+
+                <div class="hero-image">
+                    {heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
+                </div>
+                
+                <div class="prose">
+                    <div class="title">
+                        <div class="date">
+                            <FormattedDate date={pubDate} />
+                            {
+                                updatedDate && (
+                                    <div class="last-updated-on">
+                                        Last updated on <FormattedDate date={updatedDate} />
+                                    </div>
+                                )
+                            }
+                        </div>
+                        <h1>{title}</h1>
+                        <hr />
+                    </div>
+                    <slot />
+                </div>
+            </article>
+        </main>
+        <Footer />
+    </body>
 </html>

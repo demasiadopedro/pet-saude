@@ -9,7 +9,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 const gats = await getCollection('gats');
 
 // Ordena por título (GAT 1, GAT 2...)
-// Usamos localeCompare com 'numeric: true' para que GAT 10 fique depois do GAT 9, e não depois do GAT 1
 const sortedGats = gats.sort((a, b) => 
     a.data.title.localeCompare(b.data.title, undefined, { numeric: true })
 );
@@ -35,7 +34,8 @@ const sortedGats = gats.sort((a, b) =>
                     <h2>O que são os GATs?</h2>
                     <p>
                         O projeto é organizado em <strong>10 Grupos de Aprendizagem Tutorial (GATs)</strong>. 
-                        Eles são "células vivas" de atuação interdisciplinar presentes em 10 unidades de Saúde em <strong>Santarém e região</strong>.
+                        Eles são "células vivas" de atuação interdisciplinar presentes em 10 unidades de Saúde em 
+                        <strong>Santarém e região</strong>.
                     </p>
                     <div class="divisao-grid">
                         <div class="item-divisao">
