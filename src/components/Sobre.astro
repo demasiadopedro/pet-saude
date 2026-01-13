@@ -7,21 +7,18 @@ const pilares = [
     subtitulo: "Formação na Prática",
     descricao: "No PET, alunos de TI e Saúde aprendem juntos, resolvendo problemas reais do SUS. É uma formação que une teoria da sala de aula com a realidade dos postos de saúde.",
     img: "/fotos/ensino.jpg",
-    letra: "E"
   },
   {
     titulo: "Pesquisa",
     subtitulo: "Soluções para a Realidade Local",
     descricao: "Investigamos as necessidades do território para criar ferramentas digitais úteis. Nosso laboratório é a Amazônia, e nosso objetivo é gerar inovações que funcionem aqui.",
     img: "/fotos/pesquisa.jpeg",
-    letra: "P"
   },
   {
     titulo: "Extensão",
     subtitulo: "Tecnologia a Serviço da Comunidade",
     descricao: "Não ficamos na universidade. Levamos capacitação, oficinas de letramento digital e projetos-piloto diretamente para as unidades de saúde e a população.",
     img: "/fotos/extensao.jpeg",
-    letra: "X"
   }
 ];
 ---
@@ -53,9 +50,6 @@ const pilares = [
                         alt={`Foto representando ${pilar.titulo}`} 
                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div class="absolute -bottom-5 right-5 w-[50px] h-[50px] bg-azul-petroleo rounded-full flex items-center justify-center text-white font-bold border-4 border-white text-xl z-10">
-                         <span>{pilar.letra}</span>
-                    </div>
                 </div>
 
                 <div class="pt-8 px-6 pb-6 flex-grow">
