@@ -1,129 +1,68 @@
 ---
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
+import { Image } from 'astro:assets';
 
 type Props = CollectionEntry<'blog'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="pt-br">
     <head>
         <BaseHead title={title} description={description} />
-        <style>
-            main {
-                width: calc(100% - 2em);
-                max-width: 100%;
-                margin: 0;
-            }
-            
-            /* --- NOVO ESTILO DO BOTÃO VOLTAR --- */
-            .nav-container {
-                width: 720px;
-                max-width: calc(100% - 2em);
-                margin: 0 auto 1.5rem auto; /* Centraliza igual ao texto .prose */
-                padding: 0 1em;
-            }
-
-            .voltar-link {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.5rem; /* Espaço entre seta e texto */
-                text-decoration: none;
-                color: rgb(var(--gray-dark));
-                background-color: #f3f4f6; /* Fundo cinza clarinho */
-                font-weight: 500;
-                font-size: 0.9rem;
-                padding: 0.5rem 1rem;
-                border-radius: 99px; /* Formato Pílula */
-                transition: all 0.2s ease;
-                border: 1px solid transparent;
-            }
-
-            .voltar-link:hover {
-                background-color: white;
-                color: rgb(var(--accent));
-                border-color: rgb(var(--accent));
-                transform: translateX(-3px); /* Leve movimento para esquerda */
-                box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            }
-
-            /* --- FIM DO NOVO ESTILO --- */
-
-            .hero-image {
-                width: 100%;
-            }
-            
-            .hero-image img {
-                display: block;
-                margin: 0 auto;
-                border-radius: 12px;
-                box-shadow: var(--box-shadow);
-                width: 60%; /* Mantive seus 60% */
-                object-fit: cover;
-            }
-
-            .prose {
-                width: 720px;
-                max-width: calc(100% - 2em);
-                margin: auto;
-                padding: 1em;
-                color: rgb(var(--gray-dark));
-            }
-            .title {
-                margin-bottom: 1em;
-                padding: 1em 0;
-                text-align: center;
-                line-height: 1;
-            }
-            .title h1 {
-                margin: 0 0 0.4em 0;
-            }
-            .date {
-                margin-bottom: 0.5em;
-                color: rgb(var(--gray));
-            }
-            .last-updated-on {
-                font-style: italic;
-            }
-        </style>
     </head>
 
-    <body>
+    <body class="bg-gray-50 text-gray-600 font-sans antialiased flex flex-col min-h-screen">
         <Header />
-        <main>
-            <article>
+        <main class="flex-grow w-full">
+            <article class="container mx-auto px-4 max-w-[960px] my-12">
                 
-                <div class="nav-container">
-                    <a href="/blog" class="voltar-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                        Voltar para notícias
+                {/* BOTÃO VOLTAR (NOVO) */}
+                <div class="mb-6">
+                    <a href="/blog" class="inline-flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-azul-petroleo transition-colors no-underline">
+                        &larr; Voltar para notícias
                     </a>
                 </div>
 
-                <div class="hero-image">
-                    {heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
+                {/* Imagem de Capa */}
+                <div class="w-full mb-8">
+                    {heroImage && (
+                        <Image 
+                            width={1020} 
+                            height={510} 
+                            src={heroImage} 
+                            alt="" 
+                            class="block mx-auto rounded-xl shadow-md w-full object-cover max-h-[500px]" 
+                        />
+                    )}
                 </div>
                 
-                <div class="prose">
-                    <div class="title">
-                        <div class="date">
-                            <FormattedDate date={pubDate} />
-                            {
-                                updatedDate && (
-                                    <div class="last-updated-on">
-                                        Last updated on <FormattedDate date={updatedDate} />
-                                    </div>
-                                )
-                            }
-                        </div>
-                        <h1>{title}</h1>
-                        <hr />
+                {/* Cabeçalho do Post */}
+                <div class="max-w-[720px] mx-auto text-center mb-10">
+                    <div class="text-gray-400 mb-4 text-sm font-medium">
+                        <FormattedDate date={pubDate} />
+                        {
+                            updatedDate && (
+                                <div class="italic inline ml-2">
+                                    (Atualizado em <FormattedDate date={updatedDate} />)
+                                </div>
+                            )
+                        }
                     </div>
+                    
+                    <h1 class="text-3xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
+                        {title}
+                    </h1>
+                    
+                    <hr class="border-gray-200" />
+                </div>
+                
+                {/* Conteúdo do Post */}
+                <div class="max-w-[720px] mx-auto bg-white p-8 md:p-12 rounded-xl shadow-sm border border-gray-100 blog-content">
                     <slot />
                 </div>
             </article>
@@ -131,3 +70,94 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
         <Footer />
     </body>
 </html>
+
+<style is:global>
+    /* Estilos manuais para o conteúdo do Blog (Markdown) */
+
+    .blog-content h1 { 
+        font-size: 1.875rem; 
+        line-height: 2.25rem;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: var(--color-azul-petroleo); 
+    }
+
+    .blog-content h2 { 
+        font-size: 1.5rem;
+        line-height: 2rem;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: var(--color-azul-petroleo);
+        border-left: 4px solid var(--color-laranja);
+        padding-left: 0.75rem; 
+    }
+
+    .blog-content h3 { 
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        font-weight: 700;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+        color: #1f2937;
+    }
+
+    .blog-content p { 
+        margin-bottom: 1.25rem;
+        line-height: 1.7;
+        color: #4b5563;
+        font-size: 1.1rem;
+        text-align: justify;
+    }
+    
+    .blog-content ul { 
+        list-style-type: disc;
+        list-style-position: outside;
+        margin-bottom: 1.5rem;
+        margin-left: 1.5rem;
+        color: #4b5563;
+    }
+
+    .blog-content ol { 
+        list-style-type: decimal;
+        list-style-position: outside;
+        margin-bottom: 1.5rem;
+        margin-left: 1.5rem;
+        color: #4b5563;
+    }
+
+    .blog-content li { 
+        margin-bottom: 0.5rem;
+        padding-left: 0.25rem;
+    }
+    
+    .blog-content a { 
+        color: var(--color-azul-claro);
+        font-weight: 700;
+        text-decoration: none;
+    }
+    .blog-content a:hover {
+        text-decoration: underline;
+    }
+
+    .blog-content blockquote { 
+        border-left: 4px solid #d1d5db;
+        padding-left: 1rem;
+        font-style: italic;
+        margin: 1.5rem 0;
+        color: #6b7280;
+        background-color: #f9fafb;
+        padding: 1rem;
+        border-radius: 0.5rem;
+    }
+
+    .blog-content img { 
+        border-radius: 0.5rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        width: 100%;
+        height: auto;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+</style>

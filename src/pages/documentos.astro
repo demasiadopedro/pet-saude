@@ -4,14 +4,21 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE } from '../consts';
 
+// --- CONFIGURAÇÃO DOS ÍCONES ---
+const iconStyles = {
+    pdf: "bg-red-100 text-red-600 border-red-200",
+    doc: "bg-blue-100 text-blue-600 border-blue-200",
+    planilha: "bg-green-100 text-green-600 border-green-200",
+    drive: "bg-gray-100 text-gray-600 border-gray-200"
+};
+
 // --- LISTA DE DOCUMENTOS ---
-// Adicione links do Drive aqui.
 const documentos = [
   {
     nome: "Edital de Seleção de Bolsistas 2025",
     descricao: "Regras, critérios e cronograma para seleção de novos integrantes do PET Saúde Digital.",
     data: "10/02/2024",
-    tipo: "pdf", // Opções: 'pdf', 'doc', 'planilha', 'drive'
+    tipo: "pdf", 
     link: "https://isco.ufopa.edu.br/isco/editais-2/2025/edital-de-selecao-de-discentes-para-compor-vagas-de-bolsistas-para-atuar-no-programa-de-educacao-pelo-trabalho-para-a-saude-pet-saudeinformacao-e-s/" 
   },
   {
@@ -26,236 +33,51 @@ const documentos = [
 
 <!doctype html>
 <html lang="pt-br">
-	<head>
-		<BaseHead title={`Documentos | ${SITE_TITLE}`} description="Downloads e editais do PET Saúde Digital UFOPA." />
-	</head>
-	<body>
-		<Header />
-		<main>
-            <section class="doc-header">
-                <div class="container">
-                    <h1>Documentos e Materiais</h1>
-                    <p>Acesse editais, modelos oficiais e arquivos públicos do projeto.</p>
+    <head>
+        <BaseHead title={`Documentos | ${SITE_TITLE}`} description="Downloads e editais do PET Saúde Digital UFOPA." />
+    </head>
+    <body class="bg-gray-50 text-gray-600 font-sans antialiased flex flex-col min-h-screen">
+        <Header />
+        <main class="flex-grow">
+            <section class="mt-8 mb-12">
+                <div class="container mx-auto px-4 max-w-[1200px]">
+                    <div class="bg-azul-escuro text-white py-16 px-4 text-center rounded-xl shadow-sm">
+                        <h1 class="text-3xl md:text-4xl font-bold m-0 text-white">Documentos e Materiais</h1>
+                        <p class="mt-2 text-lg opacity-90">Acesse editais, modelos oficiais e arquivos públicos do projeto.</p>
+                    </div>
                 </div>
             </section>
 
-            <section class="container">
-                <div class="lista-docs-wrapper">
-                    
-                    {documentos.map((doc) => (
-                        <a href={doc.link} target="_blank" class="doc-card">
-                            <div class={`icon-box ${doc.tipo}`}>
-                                {doc.tipo === 'pdf' && <span>PDF</span>}
-                                {doc.tipo === 'doc' && <span>DOC</span>}
-                                {doc.tipo === 'planilha' && <span>XLS</span>}
-                                {doc.tipo === 'drive' && <span>DIR</span>}
-                            </div>
+            <section class="container mx-auto px-4 max-w-[800px] mb-16 flex flex-col gap-4">
+                {documentos.map((doc) => (
+                    <a href={doc.link} target="_blank" class="group flex flex-col sm:flex-row items-start gap-6 bg-cinza-claro border border-gray-200 p-6 rounded-xl transition-all duration-200 hover:border-laranja hover:-translate-y-0.5 hover:shadow-md no-underline">
+                        
+                        <div class={`w-[60px] h-[60px] rounded-lg flex items-center justify-center font-black text-sm tracking-widest flex-shrink-0 border ${iconStyles[doc.tipo] || iconStyles.drive}`}>
+                            {doc.tipo === 'pdf' && <span>PDF</span>}
+                            {doc.tipo === 'doc' && <span>DOC</span>}
+                            {doc.tipo === 'planilha' && <span>XLS</span>}
+                            {doc.tipo === 'drive' && <span>DIR</span>}
+                        </div>
+                        
+                        <div class="flex-grow w-full">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2 group-hover:text-azul-petroleo transition-colors">
+                                {doc.nome}
+                            </h3>
+                            <p class="text-gray-500 mb-4 leading-relaxed text-base">
+                                {doc.descricao}
+                            </p>
                             
-                            <div class="doc-content">
-                                <h3>{doc.nome}</h3>
-                                <p>{doc.descricao}</p>
-                                <div class="doc-meta">
-                                    <span class="data">📅 {doc.data}</span>
-                                    <span class="btn-fake">Baixar &darr;</span>
-                                </div>
+                            <div class="flex flex-col sm:flex-row justify-between items-center border-t border-gray-100 pt-3 gap-4 sm:gap-0 mt-auto">
+                                <span class="text-sm text-gray-400 font-medium">📅 {doc.data}</span>
+                                <span class="text-laranja font-bold text-sm bg-teal-50 px-6 py-2 rounded-md transition-colors w-full sm:w-auto text-center group-hover:bg-azul-petroleo group-hover:text-white">
+                                    Baixar &darr;
+                                </span>
                             </div>
-                        </a>
-                    ))}
-
-                </div>
+                        </div>
+                    </a>
+                ))}
             </section>
-		</main>
-		<Footer />
-	</body>
+        </main>
+        <Footer />
+    </body>
 </html>
-
-<style>
-    :root {
-        --pet-cor-primaria: #115e59;
-        --pet-cor-fundo: #f8fafc;
-        --pet-cor-texto: #4b5563;
-    }
-
-    .container { 
-        max-width: 1200px;
-        margin: 0 auto; 
-        padding: 0 1rem; 
-    }
-
-    /* HEADER */
-    .doc-header {
-        background-color: var(--cor-azul-escuro);
-        color: white;
-        padding: 4rem 0 3rem 0;
-        text-align: center;
-        margin-bottom: 3rem;
-        border-radius: 9px;
-    }
-    .doc-header h1 { 
-        margin: 0; 
-        font-size: 2.5rem; 
-        color: #ffff
-    }
-    .doc-header p { 
-        opacity: 0.9; 
-        margin-top: 0.5rem; 
-        font-size: 1.2rem; 
-    }
-
-    /* LISTA WRAPPER */
-    .lista-docs-wrapper {
-        
-        max-width: 800px; /* Limita a largura para ficar elegante */
-        margin: 0 auto 4rem auto;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    /* CARD DO DOCUMENTO */
-    .doc-card {
-        display: flex;
-        align-items: flex-start;
-        gap: 1.5rem;
-        background: var( --cor-cinza-claro);
-        border: 1px solid #e2e8f0;
-        padding: 1.5rem;
-        border-radius: 12px;
-        text-decoration: none;
-        transition: all 0.2s ease;
-        position: relative;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .doc-card:hover {
-        border-color: var(--cor-laranja);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-        transform: translateY(-2px);
-    }
-
-    /* ÍCONES */
-    .icon-box {
-        width: 60px;
-        height: 60px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 900;
-        font-size: 0.9rem;
-        flex-shrink: 0;
-        letter-spacing: 1px;
-    }
-
-    /* Cores Específicas */
-    .icon-box.pdf { background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
-    .icon-box.doc { background: #dbeafe; color: #2563eb; border: 1px solid #bfdbfe; }
-    .icon-box.planilha { background: #dcfce7; color: #16a34a; border: 1px solid #bbf7d0; }
-    .icon-box.drive { background: #f3f4f6; color: #4b5563; border: 1px solid #e5e7eb; }
-
-    /* CONTEÚDO */
-    .doc-content { 
-        flex-grow: 1; 
-    }
-
-    .doc-content h3 {
-        margin: 0 0 0.5rem 0;
-        color: #1f2937;
-        font-size: 1.2rem;
-        font-weight: 600;
-    }
-    
-    .doc-card:hover h3 { 
-        color: var(--cor-azul-petroleo); 
-    }
-
-    .doc-content p {
-        margin: 0 0 1rem 0;
-        color: #6b7280;
-        font-size: 0.95rem;
-        line-height: 1.5;
-    }
-
-    /* META DADOS (DATA E BOTÃO) */
-    .doc-meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-top: 1px solid #f1f5f9;
-        padding-top: 0.8rem;
-    }
-
-    .data { 
-        font-size: 0.85rem; 
-        color: #94a3b8;
-        font-weight: 500; 
-    }
-    .btn-fake {
-        color: var(--cor-laranja);
-        font-weight: bold;
-        font-size: 0.9rem;
-        background: #f0fdfa;
-        width: 110px; 
-        box-sizing: border-box; 
-        display: inline-flex; 
-        justify-content: center;
-        align-items: center;
-        padding: 0.5rem 0; 
-        border-radius: 6px;
-        transition: 0.2s;
-        white-space: nowrap; 
-    }
-
-    .doc-card:hover .btn-fake {
-        background: var(--cor-azul-petroleo);
-        color: white;
-    }
-
-    /* RESPONSIVO */
-    @media (max-width: 600px) {
-        .doc-card { 
-            flex-direction: column; 
-            align-items: stretch; 
-            padding: 1.25rem; 
-        }
-        
-        .icon-box { 
-            height: 30px; 
-            font-size: 0.8rem; 
-            margin-bottom: 1rem; 
-        }
-        
-        .doc-meta { 
-            flex-direction: column; 
-            align-items: stretch; 
-            gap: 1rem; 
-            width: 100%; 
-        }
-        
-        .btn-fake { 
-            width: 100%; 
-            display: flex;
-            justify-content: center; 
-            margin-top: 0.5rem;
-        }
-
-        .doc-content {
-            width: 100%;
-        }
-    }
-    
-    @media (max-width: 400px) {
-        .doc-card {
-            padding: 1rem;
-        }
-        
-        .doc-content h3 {
-            font-size: 1.1rem;
-        }
-        
-        .doc-content p {
-            font-size: 0.9rem;
-        }
-    }       
-</style>

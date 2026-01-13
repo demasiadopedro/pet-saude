@@ -26,56 +26,88 @@ const { Content } = await render(gat);
     <head>
         <BaseHead title={gat.data.title} description={gat.data.description} />
     </head>
-    <body>
+    <body class="bg-gray-50 text-gray-600 font-sans antialiased flex flex-col min-h-screen">
         <Header />
-        <main>
-            <div class="gat-hero">
-                <div class="container">
-                    <a href="/cenarios" class="voltar-link">&larr; Voltar para cenários</a>
-                    <span class="badge-hero">{gat.data.cenario}</span>
-                    <h1>{gat.data.title}</h1>
+        <main class="flex-grow">
+            
+            <div class="container mx-auto px-4 max-w-[1200px] mt-8">
+                <div class="bg-azul-petroleo text-white py-12 px-6 rounded-xl shadow-md flex flex-col items-start">
+                    <a href="/cenarios" class="text-white/80 hover:text-white text-sm font-medium transition-colors mb-4 inline-flex items-center gap-1">
+                        &larr; Voltar para cenários
+                    </a>
+                    
+                    <span class="inline-block bg-white/20 text-white px-4 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">
+                        {gat.data.cenario}
+                    </span>
+                    
+                    <h1 class="text-3xl md:text-4xl font-bold mt-4 text-white">
+                        {gat.data.title}
+                    </h1>
                 </div>
             </div>
 
-            <div class="container layout-gat">
-                <article class="conteudo-gat">
+            <div class="container mx-auto px-4 max-w-[1200px] mt-12 mb-20 grid grid-cols-1 lg:grid-cols-3 gap-10">
+                
+                <article class="lg:col-span-2">
                     {gat.data.heroImage && (
                         <Image 
                             src={gat.data.heroImage} 
                             alt={gat.data.title} 
-                            class="capa-gat" 
+                            class="w-full h-auto max-h-[450px] object-cover rounded-xl shadow-sm mb-8" 
                         />
                     )}
-                    <div class="texto-md">
+                    
+                    <div class="gat-content bg-white p-8 rounded-xl border border-gray-100 shadow-sm">
                         <Content />
                     </div>
                 </article>
 
-                <aside class="sidebar-gat">
+                <aside class="flex flex-col gap-6">
+                    
+                    {/* Card Mapa */}
                     {gat.data.google_maps && (
-                        <div class="info-box">
-                            <h3>📍 Localização</h3>
-                            <p>Confira onde fica esta unidade de saúde.</p>
-                            <a href={gat.data.google_maps} target="_blank" rel="noopener noreferrer" class="botao-mapa">
+                        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                            <h3 class="text-xl font-bold text-azul-petroleo mb-2 flex items-center gap-2">
+                                📍 Localização
+                            </h3>
+                            <p class="text-sm text-gray-500 mb-4">Confira onde fica esta unidade de saúde.</p>
+                            <a 
+                                href={gat.data.google_maps} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                class="block w-full bg-red-500 hover:bg-red-600 text-white font-bold text-center py-3 rounded-lg transition-all shadow-sm hover:-translate-y-0.5 hover:shadow-md"
+                            >
                                 Ver no Google Maps
                             </a>
                         </div>
                     )}
 
-                    <div class="info-box">
-                        <h3>Composição do Grupo</h3>
-                        <p>Estrutura padrão do PET-Saúde:</p>
-                        <ul class="lista-membros">
-                            <li><strong>2 Tutores:</strong> 1 Saúde + 1 Tecnologia</li>
-                            <li><strong>3 Preceptores:</strong> Profissionais do SUS</li>
-                            <li><strong>1 Orientador:</strong> Serviço/Comunidade</li>
-                            <li><strong>10 Estudantes:</strong> Interdisciplinar</li>
+                    {/* Card Composição */}
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                        <h3 class="text-xl font-bold text-azul-petroleo mb-4">Composição do Grupo</h3>
+                        <p class="text-sm text-gray-500 mb-4">Estrutura padrão do PET-Saúde:</p>
+                        <ul class="space-y-3">
+                            <li class="flex justify-between border-b border-gray-100 pb-2 last:border-0 last:pb-0 text-sm">
+                                <strong class="text-gray-700">2 Tutores:</strong> <span class="text-gray-500">1 Saúde + 1 Tecnologia</span>
+                            </li>
+                            <li class="flex justify-between border-b border-gray-100 pb-2 last:border-0 last:pb-0 text-sm">
+                                <strong class="text-gray-700">3 Preceptores:</strong> <span class="text-gray-500">Profissionais do SUS</span>
+                            </li>
+                            <li class="flex justify-between border-b border-gray-100 pb-2 last:border-0 last:pb-0 text-sm">
+                                <strong class="text-gray-700">1 Orientador:</strong> <span class="text-gray-500">Serviço/Comunidade</span>
+                            </li>
+                            <li class="flex justify-between border-b border-gray-100 pb-2 last:border-0 last:pb-0 text-sm">
+                                <strong class="text-gray-700">10 Estudantes:</strong> <span class="text-gray-500">Interdisciplinar</span>
+                            </li>
                         </ul>
                     </div>
 
-                    <div class="info-box destaque">
-                        <h3>Objetivo</h3>
-                        <p>{gat.data.description}</p>
+                    {/* Card Objetivo (Destaque) */}
+                    <div class="bg-teal-50 p-6 rounded-xl border border-teal-100 shadow-sm">
+                        <h3 class="text-xl font-bold text-azul-petroleo mb-3">Objetivo</h3>
+                        <p class="text-gray-700 leading-relaxed text-sm text-justify">
+                            {gat.data.description}
+                        </p>
                     </div>
                 </aside>
             </div>
@@ -84,87 +116,130 @@ const { Content } = await render(gat);
     </body>
 </html>
 
-<style>
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+<style is:global>
+    /* CORREÇÃO: 
+       Substituímos todos os "@apply" por CSS padrão para corrigir o erro 
+       "unknown utility class" do Tailwind v4.
+    */
 
-    .gat-hero {
-        background: var(--cor-azul-petroleo);
-        color: white;
-        padding: 3rem 0;
-        border-radius: 9px;
-        align-items: center;
+    /* h1: text-3xl font-bold mt-8 mb-4 text-azul-petroleo */
+    .gat-content h1 { 
+        font-size: 1.875rem; 
+        line-height: 2.25rem;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: var(--color-azul-petroleo); 
     }
-    .voltar-link { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; }
-    .voltar-link:hover { text-decoration: underline; color: white; }
+
+    /* h2: text-2xl font-bold mt-8 mb-4 text-azul-petroleo border... */
+    .gat-content h2 { 
+        font-size: 1.5rem;
+        line-height: 2rem;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: var(--color-azul-petroleo);
+        border-left: 4px solid var(--color-laranja);
+        padding-left: 0.75rem; 
+    }
+
+    /* h3: text-xl font-bold mt-6 mb-3 text-gray-800 */
+    .gat-content h3 { 
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        font-weight: 700;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+        color: #1f2937;
+    }
+
+    /* p: mb-4 leading-relaxed text-gray-600 text-lg text-justify */
+    .gat-content p { 
+        margin-bottom: 1rem;
+        line-height: 1.625;
+        color: #4b5563;
+        font-size: 1.125rem;
+        text-align: justify;
+    }
     
-    .badge-hero {
-        display: inline-block;
-        background: rgba(255,255,255,0.2);
-        padding: 0.3rem 0.8rem;
-        border-radius: 50px;
-        margin-top: 1rem;
-        font-size: 0.9rem;
-    }
-    h1 { 
-        margin: 0.5rem 0 0 0; 
-        font-size: 2rem; 
-        color:white;
-    }
-
-    /* LAYOUT DUAS COLUNAS */
-    .layout-gat {
-        display: grid;
-        grid-template-columns: 2fr 1fr; /* Conteúdo 2x maior que lateral */
-        gap: 3rem;
-        margin-top: 3rem;
-        margin-bottom: 4rem;
-    }
-
-    /* Conteúdo Markdown */
-    .capa-gat { width: 100%; border-radius: 12px; margin-bottom: 2rem; max-height: 400px; object-fit: cover; }
-    
-    /* Estilizando o texto que vem do Markdown */
-    .texto-md { line-height: 1.8; color: #374151; }
-    .texto-md h2 { color: var(--cor-azul-petroleo); margin-top: 2rem; }
-    .texto-md ul { margin-bottom: 1.5rem; }
-    .texto-md li { margin-bottom: 0.5rem; }
-
-    /* Sidebar */
-    .info-box {
-        background: #f8fafc;
-        padding: 1.5rem;
-        border-radius: 12px;
+    /* ul: list-disc list-outside mb-6 ml-5 text-gray-600 */
+    .gat-content ul { 
+        list-style-type: disc;
+        list-style-position: outside;
         margin-bottom: 1.5rem;
-        border: 1px solid #e2e8f0;
+        margin-left: 1.25rem;
+        color: #4b5563;
     }
-    .info-box.destaque { border-color: var(--cor-laranja); background: #f0fdfa; }
 
-    .info-box h3 { margin-top: 0; color: var(--cor-azul-petroleo); font-size: 1.2rem; }
-    .lista-membros { list-style: none; padding: 0; }
-    .lista-membros li { border-bottom: 1px solid #e5e7eb; padding: 0.5rem 0; font-size: 0.95rem; }
-    .lista-membros li:last-child { border-bottom: none; }
+    /* ol: list-decimal list-outside mb-6 ml-5 text-gray-600 */
+    .gat-content ol { 
+        list-style-type: decimal;
+        list-style-position: outside;
+        margin-bottom: 1.5rem;
+        margin-left: 1.25rem;
+        color: #4b5563;
+    }
 
-    /* --- NOVO CSS: BOTÃO MAPA --- */
-    .botao-mapa {
-        display: block;
-        background-color: #ef4444; /* Vermelho padrão para destaque de mapa */
-        color: white;
-        text-align: center;
-        padding: 0.75rem;
-        border-radius: 6px;
+    /* li: mb-2 pl-1 */
+    .gat-content li { 
+        margin-bottom: 0.5rem;
+        padding-left: 0.25rem;
+    }
+    
+    /* a: text-azul-claro font-bold hover:underline ... */
+    .gat-content a { 
+        color: var(--color-azul-claro);
+        font-weight: 700;
         text-decoration: none;
-        font-weight: 600;
-        margin-top: 1rem;
-        transition: transform 0.2s, background-color 0.2s;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .gat-content a:hover {
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 2px;
     }
 
-    .botao-mapa:hover {
-        background-color: #dc2626;
-        transform: translateY(-2px);
+    /* blockquote */
+    .gat-content blockquote { 
+        border-left: 4px solid #d1d5db;
+        padding-left: 1rem;
+        font-style: italic;
+        margin: 1.5rem 0;
+        color: #6b7280;
+        background-color: #f9fafb;
+        padding: 0.5rem;
+        border-top-right-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
     }
 
-    @media (max-width: 768px) {
-        .layout-gat { grid-template-columns: 1fr; }
+    /* img */
+    .gat-content img { 
+        border-radius: 0.5rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        width: 100%;
+        height: auto;
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    }
+    
+    /* tables */
+    .gat-content table { 
+        width: 100%;
+        text-align: left;
+        border-collapse: collapse;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .gat-content th { 
+        background-color: #f3f4f6;
+        padding: 0.75rem;
+        font-weight: 700;
+        color: #374151;
+        border: 1px solid #e5e7eb;
+    }
+    .gat-content td { 
+        padding: 0.75rem;
+        border: 1px solid #e5e7eb;
+        color: #4b5563;
     }
 </style>
