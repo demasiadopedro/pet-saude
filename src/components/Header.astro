@@ -1,8 +1,7 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import { Button } from './ui/button';
 
-
+import MenuRender from "./MenuRender.astro"
+import MenuMobile from "./MenuMobile"
 const itemsDoCabecalho = [
     {href: '/', label:'Pagina Inicial'},
     {href: '/blog', label:'Noticias'},
@@ -16,26 +15,14 @@ const itemsDoCabecalho = [
 <header class=" sticky top-0 m-0 right-0 left-0 z-[999] px-6 bg-white shadow-cn">
     <nav class="flex items-center justify-between">
         <div class="container mx-auto flex items-center justify-between">
-
+            <!-- header do desktop -->
             <h2 class="m-0 text-base">
                 <a href="/" class="no-underline">
                     <img src="/pet_logo_minimal.svg" alt="Logo Principal do PET SAUDE" width="56" height="56" class="w-12 h-12 md:w-14 md:h-14"/>     
                 </a>
             </h2>
-            <div class="flex items-center gap-2 md:gap-4">
-                {itemsDoCabecalho.map(item=>
-                    <Button
-                        key={item.href}
-                        asChild
-                        className='bg-transparent hover:bg-transparent text-black shadow-none justify-start md:justify-center'
-                    >
-                        <HeaderLink href={item.href} class="text-xs md:text-sm px-1 md:px-2 py-1 text-black border-b-4 border-transparent hover:border-azul-claro no-underline [&.active]:border-azul-claro">
-                            {item.label}
-                        </HeaderLink>
-                    </Button>
-                )}
-            </div>
-            <div class="hidden md:flex gap-4">
+            <div class="hidden md:flex gap-7">
+                <MenuRender/>
                 <a href="https://www.instagram.com/pet_saude_ufopa?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="text-gray-800 hover:text-azul-petroleo">
                     <span class="sr-only"> Nos siga no instagram</span>
                     <svg viewBox="0 0 16 16" aria-hidden="true" class="w-8 h-8 fill-current">
@@ -45,6 +32,10 @@ const itemsDoCabecalho = [
                         />
                     </svg>
                 </a>
+            </div>
+            <!-- menu mobile -->
+            <div class="md:hidden">
+                <MenuMobile client:load />
             </div>
         </div>
     </nav>

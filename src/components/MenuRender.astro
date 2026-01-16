@@ -1,0 +1,31 @@
+---
+import HeaderLink from './HeaderLink.astro';
+import { Button } from './ui/button';
+
+
+const itemsDoCabecalho = [
+    {href: '/', label:'Pagina Inicial'},
+    {href: '/blog', label:'Noticias'},
+    {href: '/cenarios', label:'Cenários'},
+    {href: '/documentos', label:'Documentos'},
+    
+]
+---
+<div class="flex items-center gap-2 md:gap-4">
+    {
+        itemsDoCabecalho.map((item) => (
+            <Button
+                key={item.href}
+                asChild
+                className="bg-transparent hover:bg-transparent text-black shadow-none justify-start md:justify-center"
+            >
+                <HeaderLink
+                    href={item.href}
+                    class="text-xs md:text-sm px-1 md:px-2 py-1 text-black border-b-4 border-transparent hover:border-azul-claro no-underline [&.active]:border-azul-claro"
+                >
+                    {item.label}
+                </HeaderLink>
+            </Button>
+        ))
+    }
+</div>
