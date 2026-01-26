@@ -1,25 +1,33 @@
 ---
+import { Image } from "astro:assets";
+import ensino_image from "../assets/fotos/ensino.jpg";
+import pesquisa_image from "../assets/fotos/pesquisa.jpeg";
+import extensao_image from "../assets/fotos/extensao.jpeg";
+
 // src/components/Sobre.astro
 
 const pilares = [
-  {
-    titulo: "Ensino",
-    subtitulo: "Formação na Prática",
-    descricao: "No PET, alunos de TI e Saúde aprendem juntos, resolvendo problemas reais do SUS. É uma formação que une teoria da sala de aula com a realidade dos postos de saúde.",
-    img: "/fotos/ensino.jpg",
-  },
-  {
-    titulo: "Pesquisa",
-    subtitulo: "Soluções para a Realidade Local",
-    descricao: "Investigamos as necessidades do território para criar ferramentas digitais úteis. Nosso laboratório é a Amazônia, e nosso objetivo é gerar inovações que funcionem aqui.",
-    img: "/fotos/pesquisa.jpeg",
-  },
-  {
-    titulo: "Extensão",
-    subtitulo: "Tecnologia a Serviço da Comunidade",
-    descricao: "Não ficamos na universidade. Levamos capacitação, oficinas de letramento digital e projetos-piloto diretamente para as unidades de saúde e a população.",
-    img: "/fotos/extensao.jpeg",
-  }
+    {
+        titulo: "Ensino",
+        subtitulo: "Formação na Prática",
+        descricao:
+            "No PET, alunos de TI e Saúde aprendem juntos, resolvendo problemas reais do SUS. É uma formação que une teoria da sala de aula com a realidade dos postos de saúde.",
+        img: "../assets/fotos/ensino.jpg",
+    },
+    {
+        titulo: "Pesquisa",
+        subtitulo: "Soluções para a Realidade Local",
+        descricao:
+            "Investigamos as necessidades do território para criar ferramentas digitais úteis. Nosso laboratório é a Amazônia, e nosso objetivo é gerar inovações que funcionem aqui.",
+        img: "../assets/fotos/pesquisa.jpeg",
+    },
+    {
+        titulo: "Extensão",
+        subtitulo: "Tecnologia a Serviço da Comunidade",
+        descricao:
+            "Não ficamos na universidade. Levamos capacitação, oficinas de letramento digital e projetos-piloto diretamente para as unidades de saúde e a população.",
+        img: "../assets/fotos/extensao.jpeg",
+    },
 ];
 ---
 
@@ -29,10 +37,18 @@ const pilares = [
             O Programa PET Saúde
         </h2>
         <p class="text-lg text-gray-600 leading-relaxed text-justify mb-5">
-            O <strong>Programa de Educação pelo Trabalho para a Saúde (PET Saúde)</strong> é uma iniciativa nacional que forma profissionais de saúde e tecnologia <strong>diretamente dentro do SUS</strong>, unindo universidade, serviço e comunidade.
+            O <strong
+                >Programa de Educação pelo Trabalho para a Saúde (PET Saúde)</strong
+            > é uma iniciativa nacional que forma profissionais de saúde e tecnologia
+            <strong>diretamente dentro do SUS</strong>, unindo universidade,
+            serviço e comunidade.
         </p>
         <p class="text-lg text-gray-600 leading-relaxed text-justify">
-            Em Santarém, somos o <strong>PET Saúde Digital (I&SD) da UFOPA</strong>. Nosso diferencial é usar essa metodologia para <strong>criar e aplicar tecnologia</strong> que resolva os desafios únicos da saúde na Amazônia.
+            Em Santarém, somos o <strong
+                >PET Saúde Digital (I&SD) da UFOPA</strong
+            >. Nosso diferencial é usar essa metodologia para <strong
+                >criar e aplicar tecnologia</strong
+            > que resolva os desafios únicos da saúde na Amazônia.
         </p>
     </div>
 
@@ -41,29 +57,80 @@ const pilares = [
     </h3>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1200px] mx-auto">
-        {pilares.map((pilar) => (
-            <div class="bg-white rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col text-left group">
-                
-                <div class="relative h-[220px] w-full overflow-hidden">
-                    <img 
-                        src={pilar.img} 
-                        alt={`Foto representando ${pilar.titulo}`} 
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                </div>
-
-                <div class="pt-8 px-6 pb-6 flex-grow">
-                    <h3 class="text-2xl font-bold text-laranja mb-1 leading-tight">
-                        {pilar.titulo} 
-                        <span class="block text-sm font-normal text-gray-400 mt-1">
-                            | {pilar.subtitulo}
-                        </span>
-                    </h3>
-                    <p class="text-gray-600 text-base leading-relaxed mt-4">
-                        {pilar.descricao}
-                    </p>
-                </div>
+        <div
+            class="bg-white rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col text-left group"
+        >
+            <div class="relative h-[220px] w-full overflow-hidden">
+                <Image
+                    src={ensino_image}
+                    alt={`Foto representando ${pilares[0].titulo}`}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    height={1080}
+                    width={800}
+                />
             </div>
-        ))}
+
+            <div class="pt-8 px-6 pb-6 flex-grow">
+                <h3 class="text-2xl font-bold text-laranja mb-1 leading-tight">
+                    {pilares[0].titulo}
+                    <span class="block text-sm font-normal text-gray-400 mt-1">
+                        | {pilares[0].subtitulo}
+                    </span>
+                </h3>
+                <p class="text-gray-600 text-base leading-relaxed mt-4">
+                    {pilares[0].descricao}
+                </p>
+            </div>
+        </div>
+        <div
+            class="bg-white rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col text-left group"
+        >
+            <div class="relative h-[220px] w-full overflow-hidden">
+                <Image
+                    src={pesquisa_image}
+                    alt={`Foto representando ${pilares[1].titulo}`}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    height={1080}
+                    width={800}
+                />
+            </div>
+
+            <div class="pt-8 px-6 pb-6 flex-grow">
+                <h3 class="text-2xl font-bold text-laranja mb-1 leading-tight">
+                    {pilares[1].titulo}
+                    <span class="block text-sm font-normal text-gray-400 mt-1">
+                        | {pilares[1].subtitulo}
+                    </span>
+                </h3>
+                <p class="text-gray-600 text-base leading-relaxed mt-4">
+                    {pilares[1].descricao}
+                </p>
+            </div>
+        </div>
+        <div
+            class="bg-white rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col text-left group"
+        >
+            <div class="relative h-[220px] w-full overflow-hidden">
+                <Image
+                    src={extensao_image}
+                    alt={`Foto representando ${pilares[2].titulo}`}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    height={1080}
+                    width={800}
+                />
+            </div>
+
+            <div class="pt-8 px-6 pb-6 flex-grow">
+                <h3 class="text-2xl font-bold text-laranja mb-1 leading-tight">
+                    {pilares[2].titulo}
+                    <span class="block text-sm font-normal text-gray-400 mt-1">
+                        | {pilares[2].subtitulo}
+                    </span>
+                </h3>
+                <p class="text-gray-600 text-base leading-relaxed mt-4">
+                    {pilares[2].descricao}
+                </p>
+            </div>
+        </div>
     </div>
 </section>
