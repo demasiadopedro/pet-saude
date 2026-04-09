@@ -18,15 +18,15 @@ export function HomeCarousel() {
   const slides = [
     {
       href: "/blog",
-      img: "./public/bannerFotos/banner-sd.webp",
+      img: "/public/bannerFotos/banner-sd.webp",
       alt: "Imagem de Saúde Digital",
       title: "Fique por dentro das novidades",
       desc: "Acompanhe as últimas notícias sobre saúde digital no oeste do Pará.",
     },
     {
       href: "/cenarios",
-      img: "./public/bannerFotos/banner-padrao.webp",
-      alt: "Equipe em campooooooo",
+      img: "/public/bannerFotos/banner-padrao.webp",
+      alt: "Equipe em campo",
       title: "Venha nos conhecer",
       desc: "Descubra onde atuamos e como impactamos a comunidade.",
     },
