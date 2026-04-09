@@ -26,7 +26,7 @@ export function HomeCarousel() {
     {
       href: "/cenarios",
       img: "./public/bannerFotos/banner-padrao.webp",
-      alt: "Equipe em campo",
+      alt: "Equipe em campooooooo",
       title: "Venha nos conhecer",
       desc: "Descubra onde atuamos e como impactamos a comunidade.",
     },
